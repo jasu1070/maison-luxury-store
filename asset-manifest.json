@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/maison-luxury-store/static/css/main.db5beee0.css",
+    "main.js": "/maison-luxury-store/static/js/main.7a6bb804.js",
+    "index.html": "/maison-luxury-store/index.html",
+    "main.db5beee0.css.map": "/maison-luxury-store/static/css/main.db5beee0.css.map",
+    "main.7a6bb804.js.map": "/maison-luxury-store/static/js/main.7a6bb804.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.db5beee0.css",
+    "static/js/main.7a6bb804.js"
+  ]
+}
