@@ -40,7 +40,11 @@ export default function Footer({ onNav }) {
             <div className="footer-col-title">Collections</div>
             <nav className="footer-links" aria-label="Shop navigation">
               {SHOP.map(l => (
-                <button key={l} className="footer-link" onClick={() => onNav('shop')}>{l}</button>
+                <button key={l} className="footer-link" onClick={() => {
+                  const filter = l.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-');
+                  if (['new-arrivals', 'best-sellers', 'the-sale'].includes(filter)) onNav('shop', filter);
+                  else onNav('shop');
+                }}>{l}</button>
               ))}
             </nav>
           </div>
@@ -50,7 +54,10 @@ export default function Footer({ onNav }) {
             <div className="footer-col-title">Assistance</div>
             <nav className="footer-links" aria-label="Help links">
               {HELP.map(l => (
-                <button key={l} className="footer-link">{l}</button>
+                <button key={l} className="footer-link" onClick={() => {
+                  if (l === 'Contact Us') onNav('contact');
+                  else onNav('support', l.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-'));
+                }}>{l}</button>
               ))}
             </nav>
           </div>
@@ -83,7 +90,7 @@ export default function Footer({ onNav }) {
           <span className="footer-copy">© 2025 Maison. All rights reserved.</span>
           <nav className="footer-legal" aria-label="Legal">
             {['Privacy','Terms','Cookies'].map(l => (
-              <button key={l} className="footer-legal-link">{l}</button>
+              <button key={l} className="footer-legal-link" onClick={() => onNav('legal', l.toLowerCase())}>{l}</button>
             ))}
           </nav>
         </div>

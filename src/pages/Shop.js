@@ -9,7 +9,7 @@ const SORTS = [
   { v:'rating', l:'Highest Rated' },
 ];
 
-export default function Shop({ onAdd, onNav }) {
+export default function Shop({ filter, onAdd, onNav }) {
   const [cats, setCats] = useState([]);
   const [sort, setSort] = useState('featured');
   const [maxPrice, setMaxPrice] = useState(700);
@@ -19,11 +19,17 @@ export default function Shop({ onAdd, onNav }) {
   const products = useMemo(() => {
     let list = PRODUCTS.filter(p => p.price <= maxPrice);
     if (cats.length) list = list.filter(p => cats.includes(p.category));
+    
+    // Collection filters
+    if (filter === 'new-arrivals') list = list.filter(p => p.badge === 'New');
+    if (filter === 'best-sellers') list = list.filter(p => p.badge === 'Best Seller' || p.badge === 'Popular');
+    if (filter === 'the-sale') list = list.filter(p => p.badgeType === 'sale');
+
     if (sort === 'price-asc') list = [...list].sort((a,b) => a.price - b.price);
     if (sort === 'price-desc') list = [...list].sort((a,b) => b.price - a.price);
     if (sort === 'rating') list = [...list].sort((a,b) => b.rating - a.rating);
     return list;
-  }, [cats, sort, maxPrice]);
+  }, [cats, sort, maxPrice, filter]);
 
   return (
     <main id="main-content">
@@ -31,7 +37,7 @@ export default function Shop({ onAdd, onNav }) {
         <div className="container">
           <span className="eyebrow" style={{ display:'block', marginBottom:12 }}>Collections</span>
           <h1 style={{ fontFamily:'var(--font-display)', fontSize:'var(--text-4xl)', fontWeight:300, color:'var(--ivory)', letterSpacing:'-0.01em', marginBottom:'var(--s1)' }}>
-            All Pieces
+            {filter ? filter.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : 'All Pieces'}
           </h1>
           <p style={{ color:'var(--smoke)', fontWeight:300 }}>
             {PRODUCTS.length} carefully curated objects

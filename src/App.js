@@ -7,6 +7,11 @@ import Home from './pages/Home';
 import Shop from './pages/Shop';
 import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/Cart';
+import Contact from './pages/Contact';
+import Support from './pages/Support';
+import Legal from './pages/Legal';
+import Atelier from './pages/Atelier';
+import Journal from './pages/Journal';
 import './styles/global.css';
 import './styles/layout.css';
 import './styles/components.css';
@@ -111,9 +116,14 @@ export default function App() {
 
   const renderPage = () => {
     switch(page) {
-      case 'shop':    return <Shop onAdd={addToCart} onNav={nav} />;
+      case 'shop':    return <Shop filter={productId} onAdd={addToCart} onNav={nav} />;
       case 'product': return <ProductDetails productId={productId} onAdd={addToCart} onNav={nav} />;
       case 'cart':    return <Cart items={cart} onQty={updateQty} onRemove={removeItem} onNav={nav} />;
+      case 'contact': return <Contact onNav={nav} />;
+      case 'support': return <Support category={productId} onNav={nav} />;
+      case 'legal':   return <Legal category={productId} onNav={nav} />;
+      case 'atelier': return <Atelier onNav={nav} />;
+      case 'journal': return <Journal onNav={nav} />;
       default:        return <Home onAdd={addToCart} onNav={nav} />;
     }
   };

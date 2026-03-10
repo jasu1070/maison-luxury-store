@@ -5,7 +5,7 @@ const LINKS = [
   { label:'Maison', page:'home' },
   { label:'Atelier', page:'shop' },
   { label:'Journal', page:'home' },
-  { label:'Contact', page:'home' },
+  { label:'Contact', page:'contact' },
 ];
 
 export default function Navbar({ page, onNav, cartCount, onCart, onSearch }) {
@@ -42,7 +42,11 @@ export default function Navbar({ page, onNav, cartCount, onCart, onSearch }) {
                 <button
                   key={l.label}
                   className={`nav-link${page === l.page ? ' active' : ''}`}
-                  onClick={() => onNav(l.page)}
+                  onClick={() => {
+                    if (l.label === 'Atelier') onNav('atelier');
+                    else if (l.label === 'Journal') onNav('journal');
+                    else onNav(l.page);
+                  }}
                 >
                   {l.label}
                 </button>
